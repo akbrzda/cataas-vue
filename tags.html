@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      async function tags() {
+        const requestURL = "https://cataas.com/api/tags";
+        const request = new Request(requestURL);
+
+        const response = await fetch(request);
+        const tagsListJson = await response.json();
+
+        tagsList(tagsListJson);
+      }
+      function tagsList(obj) {
+        const mainSection = document.querySelector(".card");
+        const tagsJsonList = obj;
+        const myList = document.createElement("ul");
+        for (const tag of tagsJsonList) {
+          const listItem = document.createElement("li");
+          listItem.textContent = tag;
+          myList.appendChild(listItem);
+        }
+        mainSection.appendChild(myList);
+      }
+
+      tags();
+    </script>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="card"></div>
+  </body>
+</html>
